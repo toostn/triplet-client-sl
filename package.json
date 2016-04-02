@@ -1,0 +1,26 @@
+{
+  "name": "triplet-client-sl",
+  "version": "0.1.0",
+  "description": "Storstockholms Lokaltrafik client for Triplet travel planner",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toostn/triplet-client-sl.git"
+  },
+  "keywords": [
+    "triplet",
+    "sl"
+  ],
+  "author": "Torsten Freyhall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toostn/triplet-client-sl/issues"
+  },
+  "homepage": "https://github.com/toostn/triplet-client-sl#readme",
+  "dependencies": {
+    "triplet-core": "^0.1.0"
+  }
+}
