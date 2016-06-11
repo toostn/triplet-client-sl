@@ -1,10 +1,10 @@
-var Client = require('triplet-core/client.js');
-var parsers = require('./parsers.js');
-var urlParams = require('./url-params');
+var Client = require('triplet-core/client.js')
+var parsers = require('./parsers.js')
+var urlParams = require('./url-params')
 
-var BASE_URL = 'https://api.sl.se/api2';
+var BASE_URL = 'https://api.sl.se/api2'
 
-module.exports = function slClientFactory(apiKeys, http) {
+module.exports = function slClientFactory (apiKeys, http) {
   return new Client(http, {
     apiKeys: apiKeys,
     shortName: 'sl',
@@ -20,9 +20,9 @@ module.exports = function slClientFactory(apiKeys, http) {
       coordinateSearch: true,
       quickMode: true
     }
-  });
-};
+  })
+}
 
-function slUrl(endpoint) {
-  return BASE_URL + endpoint;
+function slUrl (endpoint) {
+  return BASE_URL + endpoint
 }
