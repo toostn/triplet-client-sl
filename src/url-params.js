@@ -2,7 +2,7 @@ var LocalTime = require('triplet-core/local-time.js')
 var dtString = require('triplet-core/util/client-util.js').dtString
 var PAST_TRIP_SEARCH_TIME = 300000
 
-exports.trips = function trips (query, config) {
+exports.trips = function (query, config) {
   var params = {
     key: config.apiKeys.trips,
     encoding: 'utf-8',
@@ -46,7 +46,7 @@ exports.trips = function trips (query, config) {
   return params
 }
 
-exports.nearbyStations = function nearbyStations (query, config) {
+exports.nearbyStations = function (query, config) {
   var location = query.location
   var params = {
     key: config.apiKeys.nearbystations
@@ -63,7 +63,7 @@ exports.nearbyStations = function nearbyStations (query, config) {
   return params
 }
 
-exports.stations = function stations (query, config) {
+exports.stations = function (query, config) {
   return {
     key: config.apiKeys.stations,
     stationsonly: false,

@@ -26,26 +26,26 @@ var vtTypes = {
   'TAXI': types.taxi
 }
 
-exports.stationsError = function stationsError (json) {
+exports.stationsError = function (json) {
   return (json.StatusCode !== 0) ? json.Message : null
 }
 
-exports.stations = function stations (json) {
+exports.stations = function (json) {
   var data = json.ResponseData
   return (!data) ? [] : forceArray(data).map(station)
 }
 
-exports.nearbyStations = function nearbyStations (json) {
+exports.nearbyStations = function (json) {
   var data = json.LocationList
 
   return (!data) ? [] : forceArray(data.StopLocation).map(station)
 }
 
-exports.nearbyStationsError = function nearbyStationsError (json) {
+exports.nearbyStationsError = function (json) {
   return (json.StatusCode !== undefined) ? json.Message : null
 }
 
-exports.tripsError = function tripsError (json) {
+exports.tripsError = function (json) {
   return json.TripList.errorText || null
 }
 

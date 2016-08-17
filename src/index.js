@@ -4,7 +4,7 @@ var urlParams = require('./url-params')
 
 var BASE_URL = 'https://api.sl.se/api2'
 
-module.exports = function slClientFactory (apiKeys, http) {
+module.exports = function (apiKeys, http) {
   return new Client(http, {
     apiKeys: apiKeys,
     shortName: 'sl',
