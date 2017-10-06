@@ -4,8 +4,10 @@ var PAST_TRIP_SEARCH_TIME = 300000
 
 exports.trips = function (query, config) {
   var params = {
-    key: config.apiKeys.trips,
     encoding: 'utf-8',
+    key: config.apiKeys.trips,
+    lang: 'sv',
+    numB: 0,
     numTrips: query.maxResults || 6,
     realtime: true
   }

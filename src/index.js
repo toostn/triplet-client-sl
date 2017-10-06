@@ -12,7 +12,7 @@ module.exports = function (apiKeys, http) {
     params: urlParams,
     parsers: parsers,
     stations: slUrl('/typeahead.json'),
-    trips: slUrl('/TravelplannerV2/trip.json'),
+    trips: slUrl('/TravelplannerV3/trip.json'),
     nearbyStations: slUrl('/nearbystops.json'),
     geojson: require('./area.json'),
     supports: {
