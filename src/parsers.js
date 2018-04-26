@@ -13,17 +13,15 @@ var parseDate = Utils.parseLocalDate
 var lineColors = require('./line-colors.json')
 
 var types = Carrier.Types
-var vtTypes = {
-  'METRO': types.metro,
+var SL_CATEGORIES = {
+  'MET': types.metro,
   'BUS': types.bus,
-  'NARBUSS': types.bus,
-  'TRAIN': types.commuterTrain,
-  'TRAM': types.tram,
-  'SHIP': types.boat,
-  'FERRY': types.boat,
-  'WALK': types.walk,
-  'BIKE': types.bike,
-  'TAXI': types.taxi
+  'NAR': types.bus,
+  'TRN': types.commuterTrain,
+  'TRM': types.tram,
+  'SHP': types.boat,
+  'FER': types.boat,
+  'WALK': types.walk
 }
 
 exports.stationsError = function (json) {
@@ -46,12 +44,16 @@ exports.nearbyStationsError = function (json) {
 }
 
 exports.tripsError = function (json) {
-  return json.TripList.errorText || null
+  return (json.StatusCode !== undefined)
+    ? json.ErrorDetails && json.ErrorDetails.errorText
+      ? json.ErrorDetails.errorText
+      : json.Message
+    : null
 }
 
 exports.trips = function (json) {
-  var data = json.TripList
-  return (!data) ? [] : forceArray(data.Trip).map(trip)
+  var data = json.Trip
+  return (!data) ? [] : forceArray(data).map(trip)
 }
 
 function station (json, parseArea) {
@@ -140,9 +142,9 @@ function legStop (json) {
 function carrier (json) {
   return new Carrier({
     name: carrierName(json.name),
-    heading: json.dir,
-    type: carrierType(json.type),
-    line: line(json),
+    heading: json.direction,
+    type: carrierType(json),
+    line: line(json.Product || {}),
     flags: {
       details: json.JourneyDetailRef
     }
@@ -160,8 +162,10 @@ function carrierName (name) {
   return name.charAt(0).toUpperCase() + name.slice(1)
 }
 
-function carrierType (type) {
-  return vtTypes[type] || types.unknown
+function carrierType (json) {
+  return (json.type === 'WALK')
+    ? types.walk
+    : SL_CATEGORIES[json.category] || types.unknown
 }
 
 function date (json) {
@@ -206,7 +210,7 @@ function messages (json) {
 }
 
 function message (json) {
-  return json.$
+  return json.value
 }
 
 function tariffMessages (json) {
